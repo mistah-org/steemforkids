@@ -14,8 +14,6 @@
 
     <!-- Bootstrap 3 -->
     <link href="../../static/core/css/bootstrap.min.css" th:href="@{/core/css/bootstrap.min.css}" rel="stylesheet" media="screen" />
-    <link href="../../static/css/bootstrap-theme.min.css" th:href="@{/css/bootstrap-theme.min.css}" rel="stylesheet" media="screen" />
-
     <link href="../../static/core/css/navbar-fixed-top.css" th:href="@{/core/css/navbar-fixed-top.css}" rel="stylesheet" />
     <link href="../../static/core/css/jquery-ui.css" th:href="@{/core/css/jquery-ui.css}" rel="stylesheet" />
     <link href="../../static/core/css/ct-navbar.css" th:href="@{/core/css/ct-navbar.css}" rel="stylesheet" />
@@ -26,7 +24,7 @@
     <script src="../../static/core/js/jquery-migrate-3.0.0.min.js" th:src="@{/core/js/jquery-migrate-3.0.0.min.js}"></script>
     <script src="../../static/core/js/bootstrap.min.js" th:src="@{/core/js/bootstrap.min.js}"></script>
     <script src="../../static/core/js/jquery-ui.js" th:src="@{/core/js/jquery-ui.js}"></script>
-    <script src="../../static/core/js/ct-navbar.js" th:src="@{core/js/ct-navbar.js}"></script>
+    <script src="../../static/core/js/ct-navbar.js" th:src="@{/core/js/ct-navbar.js}"></script>
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -101,7 +99,7 @@
           <ul class="nav nav-justified">
             <sec:authorize access="isAuthenticated()">
             <li>
-              <a href="@{ /dashboard }">
+              <a th:href="@{ /dashboard }">
                 <i class="pe-7s-timer"></i>
               </a>
             </li>
@@ -111,7 +109,7 @@
               'ROLE_LOCALE_TREASURER', 'ROLE_LOCALE_AUDITOR','ROLE_LOCALE_COORDINATOR', 'ROLE_GROUP_SERVANT',
               'ROLE_NATIONAL_COORDINATOR', 'ROLE_DISTRICT_COORDINATOR', 'ROLE_DISTRICT_SERVANT')">
             <li>
-              <a href="@{ /reports }">
+              <a th:href="@{ /reports }">
                 <i class="pe-7s-note2" style="color: white;"></i>
               </a>
             </li>
@@ -120,7 +118,7 @@
             <sec:authorize access="isAuthenticated() and hasAnyRole('ROLE_ADMIN', 'ROLE_DISTRICT_COORDINATOR', 'ROLE_DISTRICT_SERVANT'
               ,'ROLE_LOCALE_COORDINATOR','ROLE_GROUP_SERVANT')">
             <li>
-              <a href="@{ /admin }">
+              <a th:href="@{ /admin }">
                 <i class="pe-7s-config" style="color: white;"></i>
               </a>
             </li>
@@ -133,18 +131,18 @@
               </a>
               <ul class="dropdown-menu">
                 <li>
-                  <a href="@{ /logout }">Logout</a>
+                  <a th:href="@{ /logout }">Logout</a>
                 </li>
                 <li>
                   <sec:authentication property="principal.user.username" var="userId" />
-                  <a href="@{/user/${userId}/profile}">Profile</a>
+                  <a th:href="@{/user/${userId}/profile}">Profile</a>
                 </li>
               </ul>
             </li>
             </sec:authorize>
             <sec:authorize access="isAnonymous()">
             <li class="dropdown">
-              <a href="@{/login}">
+              <a th:href="@{/login}">
                 Login
               </a>
             </li>

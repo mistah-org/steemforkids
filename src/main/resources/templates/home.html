@@ -17,7 +17,9 @@
 </head>
 
 <body>
-<nav th:replace="fragments/header :: header_nav" ></nav>
+
+    <!-- Fixed navbar -->
+    <nav th:replace="fragments/header :: header_nav" ></nav>
 
     <div class="container-fluid" style="margin-top: 60px; margin-bottom: 60px;">
       <div class="row">
@@ -26,7 +28,7 @@
       </div>
     </div>
 
-<nav th:replace="fragments/footer :: footer">Footer</nav>
+    <nav th:replace="fragments/footer :: footer">Footer</nav>
 
  </body>
 </html>
