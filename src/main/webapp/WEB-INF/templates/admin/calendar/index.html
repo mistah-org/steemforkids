@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head th:replace="fragments/header_footer.html :: head">
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+
+    <link href="../../../../resources/core/css/navbar-fixed-top.css" rel="stylesheet"/>
+    <link href="../../../../resources/core/css/bootstrap.min.css" rel="stylesheet"/>
+    <link href="../../../../resources/core/css/jquery-ui.css" rel="stylesheet" />
+    <link href="../../../../resources/core/css/ct-navbar.css" rel="stylesheet" />
+    <link href="../../../../resources/core/css/pe-icon-7-stroke.css" rel="stylesheet" />
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+    <script src="../../../../resources/core/js/bootstrap.min.js"></script>
+    <script src="../../../../resources/core/js/jquery-ui.js"></script>
+    <script src="../../../../resources/core/js/ct-navbar.js"></script>
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <title>Expenses</title>
+
+    <style>
+    li.navbar-nav > a:hover, li.navbar-nav > a:focus {
+        background-color: rgba(255, 255, 255, 0.2);
+        border-radius: 4px;
+        color: #ffffff;
+        opacity: 1;
+    }
+    </style>
+
+</head>
+<body>
+    <!-- Fixed navbar -->
+    <nav th:replace="fragments/header_footer.html :: nav-bar" class="navbar navbar-ct-green navbar-fixed-top" role="navigation">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+          <ul class="nav navbar-nav">
+            <li>
+              <a href="#">
+                <i class="pe-7s-timer"></i>
+              </a>
+            </li>
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                <i class="pe-7s-note2"></i><span class="caret"></span>
+              </a>
+              <ul class="dropdown-menu">
+                <li><a href="#">Collections</a></li>
+                <li><a href="#">Expenses</a></li>
+                <li class="divider"></li>
+                <li>
+                  <a href="#">Balance Sheet</a>
+                </li>
+                <li>
+                  <a href="#">Liquidation Report</a>
+                </li>
+              </ul>
+            </li>
+          </ul>
+          <ul class="nav navbar-nav navbar-right">
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                <i class="pe-7s-user"></i> <span class="caret"></span>
+              </a>
+              <ul class="dropdown-menu">
+                <li>
+                  <a href="/logout">Logout</a>
+                </li>
+                <li><a href="#">Another action</a></li>
+                <li><a href="#">Something else here</a></li>
+                <li class="divider"></li>
+                <li><a href="#">Separated link</a></li>
+              </ul>
+            </li>
+          </ul>
+          <ul class="nav navbar-nav navbar-right">
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                <i class="pe-7s-config"></i> <span class="caret"></span>
+              </a>
+              <ul class="dropdown-menu">
+                <li class="dropdown-header">Accounts</li>
+                <li>
+                  <a href="#">Users</a>
+                </li>
+                <li>
+                  <a href="#">Roles</a>
+                </li>
+                <li role="separator" class="divider"></li>
+                <li class="dropdown-header">Locales</li>
+                <li>
+                  <a href="#">Locales</a>
+                </li>
+                <li role="separator" class="divider"></li>
+                <li class="dropdown-header">Finance</li>
+                <li>
+                  <a href="#">Expense Types</a>
+                </li>
+                <li>
+                  <a href="#">Collection Types</a>
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </div><!--/.nav-collapse -->
+      </div>
+    </nav>
+
+    <div class="container-fluid">
+      <div class="jumbotron">
+
+        <form method="POST" action="#" th:action="@{/admin/calendar}" th:object="${calendarForm}" >
+        <!-- Table -->
+        <table class="table" id="dates-table">
+          <thead>
+          <tr>
+            <th></th>
+            <th>The Date</th>
+            <th>Audit Day (Y/N)</th>
+            <th>System Day Number</th>
+          </tr>
+          </thead>
+          <tbody>
+            <tr th:each="dateEntry,rowStat : *{dateEntries}">
+              <td>
+                <input type="checkbox" class="form-control"
+                  th:field="*{dateEntries[__${rowStat.index}__].checked}" />
+              </td>
+              <td>
+                <input type="text" class="form-control datepicker" placeholder="Date"
+                  th:field="*{dateEntries[__${rowStat.index}__].theDate}"/>
+              </td>              <td>
+                <input type="text" class="form-control" placeholder="Y/N"
+                  th:field="*{dateEntries[__${rowStat.index}__].auditDay}" />
+              </td>
+              <td>
+                <input type="text" class="form-control" placeholder="System Day Number"
+                  th:field="*{dateEntries[__${rowStat.index}__].systemDayNo}"/>
+              </td>
+
+            </tr>
+          </tbody>
+        </table>
+        <div>
+          <input type="submit" value="Submit" class="btn" />
+        </div>
+        <div>
+          <a id="add-entry" href="javascript:void(0);">Add Entry</a>
+        </div>
+        </form>
+
+      </div>
+      <!-- /#jumbotron -->
+    </div>
+    <!-- Menu Toggle Script -->
+    <script>
+      $( ".datepicker" ).datepicker();
+      $("#add-entry").on("click", function() {
+        var tableBody = $('#dates-table > tbody');
+        var trLast = tableBody.find("tr:last");
+        trNew = trLast.clone();
+        $('#dates-table > tbody:last-child').append(trNew);
+        $( ".datepicker" ).datepicker();
+      });
+    </script>
+    <!-- /#container-fluid -->
+
+    <nav th:replace="fragments/header_footer.html :: bottom-nav-bar" class="navbar navbar-ct-blue navbar-fixed-bottom" role="navigation">
+      <div class="container">
+          <ul class="nav nav-justified">
+            <li class="navbar-nav">
+              <a href="#">
+                <i class="pe-7s-piggy" style="color: white;"></i>
+              </a>
+            </li>
+            <li class="navbar-nav">
+              <a href="#">
+                <i class="pe-7s-cash" style="color: white;"></i>
+              </a>
+            </li>
+            <li class="navbar-nav">
+              <a href="#">
+                <i class="pe-7s-wallet" style="color: white;"></i>
+              </a>
+            </li>
+          </ul>
+      </div><!-- /.container-fluid -->
+    </nav>
+    <!--  end navbar-bottom -->
+
+</body>
+</html>

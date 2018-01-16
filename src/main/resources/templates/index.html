@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8" />
+	<title>Gradle + Spring MVC</title>
+
+    <link href="../../static/core/css/bootstrap.min.css" th:href="@{/core/css/bootstrap.min.css}" rel="stylesheet" media="screen" />
+	<link href="../../static/core/css/hello.css" th:href="@{/core/css/hello.css}" rel="stylesheet" />
+</head>
+
+<nav class="navbar navbar-inverse navbar-fixed-top">
+	<div class="container">
+		<div class="navbar-header">
+			<a class="navbar-brand" href="#">Project Name</a>
+		</div>
+	</div>
+</nav>
+
+<div class="jumbotron">
+	<div class="container">
+		<h1>${title}</h1>
+		<p>
+			<span th:if="${not empty msg}">
+				Hello ${msg}
+			</span>
+			<span th:if="${empty msg}">
+				Welcome Welcome!
+			</span>
+		</p>
+		<p>
+			<a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a>
+		</p>
+	</div>
+</div>
+
+<div class="container">
+
+	<div class="row">
+		<div class="col-md-4">
+			<h2>Heading</h2>
+			<p>ABC</p>
+			<p>
+				<a class="btn btn-default" href="#" role="button">View details</a>
+			</p>
+		</div>
+		<div class="col-md-4">
+			<h2>Heading</h2>
+			<p>ABC</p>
+			<p>
+				<a class="btn btn-default" href="#" role="button">View details</a>
+			</p>
+		</div>
+		<div class="col-md-4">
+			<h2>Heading</h2>
+			<p>ABC</p>
+			<p>
+				<a class="btn btn-default" href="#" role="button">View details</a>
+			</p>
+		</div>
+	</div>
+
+
+	<hr />
+	<footer>
+		<p>&copy; Mkyong.com 2015</p>
+	</footer>
+</div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+<script src="../../static/core/js/hello.js" th:src="@{/core/js/hello.js}"></script>
+<script src="../../static/core/js/bootstrap.min.js" th:src="@{core/js/bootstrap.min.js}"></script>
+
+</body>
+</html>
