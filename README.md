@@ -1,6 +1,8 @@
 ## STEEM 4 Kids
 
-This application aims to reward kids. It uses Spring Boot + MongoDB + Heroku
+This application aims to reward kids. It uses Spring Boot + MongoDB + Heroku. 
+
+Base codes came from https://github.com/chris-bailey/dev-bookshelf-mongodb-heroku.
 
 ### Technology Stack
 
